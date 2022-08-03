@@ -1,13 +1,17 @@
 package com.example.autographEV.user;
 
+import com.example.autographEV.exception.RestrictedInfoException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
+
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/A4/users")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -23,10 +27,14 @@ public class UserController {
         System.out.println("All user information");
         return userService.getAllUsers();
     }
-    @GetMapping("/id")
-    public Optional<User> getById(@RequestParam(name = "id") String id) {
-        System.out.println("One User information get based for the given ID");
-        return userService.getById(id);
+    @GetMapping("/{userId}")
+    public User getById(@RequestParam("userId") String userId) {
+        System.out.println("One User information get based by the given ID");
+        return userService.getById(userId);
+    }
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity <String> noSuchElementError(){
+        return new ResponseEntity<>("No such element found", HttpStatus.NOT_FOUND);
     }
     @PutMapping
     public User updateUser (@RequestBody User user){
@@ -34,16 +42,25 @@ public class UserController {
         return userService.updateUser(user);
     }
 
-    @DeleteMapping
-    public void deleteUser(@RequestParam(name = "id") String id){
+    @DeleteMapping("/{userId}")
+    public void deleteUser(@PathVariable String userId){
         System.out.println("Delete an user information by Id" );
-        userService.deleteUser(id);
+        userService.deleteUser(userId);
     }
-    @GetMapping("/address")
-    public List<User> getByAddress(@RequestParam (name="address")String address){
+    @GetMapping("/{address}")
+    public List<User> getByAddress(@RequestParam("address") String address){
         System.out.println("Get user information by address");
         return userService.getByAddress(address);
     }
-
-
+    @GetMapping("/{name}")
+    public List<User>getByName(@RequestParam("name") String name) throws RestrictedInfoException{
+        if(name.equalsIgnoreCase("root")){
+            throw new RestrictedInfoException();
+        }
+        return userService.getByName(name);
+    }
+    @ExceptionHandler(RestrictedInfoException.class)
+    public ResponseEntity <String> restrictedInfoError(RestrictedInfoException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }

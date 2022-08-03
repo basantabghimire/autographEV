@@ -2,9 +2,8 @@ package com.example.autographEV.album;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class AlbumService {
@@ -23,13 +22,11 @@ public class AlbumService {
     }
 
     //searchAlbumId
-    public Optional<Album> getById(String albumId) {
-        return albumRepository.findById(albumId);
+    public Album getById(String albumId) {
+        return albumRepository.findById(albumId).get();
     }
     //update
-    public Album updateAlbum(Album album) {
-        return albumRepository.save(album);
-    }
+    public Album updateAlbum(Album album) { return albumRepository.save(album); }
     //delete
     public void deleteAlbum(String albumId) {
         albumRepository.deleteById(albumId);

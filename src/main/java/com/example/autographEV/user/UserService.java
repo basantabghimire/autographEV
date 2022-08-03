@@ -19,14 +19,15 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> getById(String Id) {
-        return userRepository.findById(Id);
+    public User getById(String userId) {
+        return userRepository.findById(userId).get();
     }
 
     public User updateUser(User user) { return userRepository.save(user);}
 
-    public void deleteUser(String id) { userRepository.deleteById(id);}
+    public void deleteUser(String userId) { userRepository.deleteById(userId);}
 
     public List<User> getByAddress(String address) { return userRepository.findAllByAddress(address); }
 
+    public List<User> getByName(String name) { return userRepository.findAllByName(name); }
 }

@@ -5,10 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
+
 
 @RestController
-@RequestMapping("/api/album")
+@RequestMapping("/api/A4/album")
 public class AlbumController {
 
     @Autowired
@@ -24,22 +25,24 @@ public class AlbumController {
         System.out.println("Get all album");
         return albumService.getAllAlbums();
     }
-    @GetMapping("/AlbumId")
-    public Optional<Album> getById(@RequestParam(name="albumId") String albumId){
+    @GetMapping("/{albumId}")
+    public Album getById(@RequestParam("albumId") String albumId){
         System.out.println("get album by Id");
         return albumService.getById(albumId);
     }
+    @ExceptionHandler(NoSuchElementException.class)
+    public String noSuchElementError(){
+        return "No such element found";
+    }
     @PutMapping
     public Album updateAlbum(@RequestBody Album album){
-        System.out.println("Edit album ");
+        System.out.println("Edit album");
         return albumService.updateAlbum(album);
     }
 
-    @DeleteMapping("AlbumId")
-    public void deleteAlbum (@RequestParam (name="albumId") String albumId){
+    @DeleteMapping("{albumId}")
+    public void deleteAlbum(@PathVariable String albumId){
         System.out.println("Delete album by Id");
         albumService.deleteAlbum(albumId);
     }
-
-
 }

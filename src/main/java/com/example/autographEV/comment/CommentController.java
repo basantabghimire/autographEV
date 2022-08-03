@@ -4,10 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
+
 
 @RestController
-@RequestMapping("/api/comment")
+@RequestMapping("/api/A4/comment")
 public class CommentController {
 
     @Autowired
@@ -24,10 +25,14 @@ public class CommentController {
         System.out.println("All comments shows");
         return commentService.getAllComments();
     }
-    @GetMapping("/commentId")
-    public Optional<Comment> getById(@RequestParam(name = "commentId")String commentId){
+    @GetMapping("/{commentId}")
+    public Comment getById(@RequestParam("commentId") String commentId){
         System.out.println("Comment get by Id");
         return commentService.getCommentById(commentId);
+    }
+    @ExceptionHandler(NoSuchElementException.class)
+    public String noSuchElementError(){
+        return "No such element found";
     }
 
     @PutMapping
@@ -36,8 +41,8 @@ public class CommentController {
         return commentService.updateComment(comment);
     }
 
-    @DeleteMapping("/commentId")
-    public void deleteComment(@RequestParam(name="commentId")String commentId){
+    @DeleteMapping("/{commentId}")
+    public void deleteComment(@PathVariable String commentId){
         System.out.println("Delete your comment");
         commentService.deleteComment(commentId);
     }

@@ -12,7 +12,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @Configuration
 @EnableMongoAuditing
-@Component
+//@Component
 public class AutographEvApplication {
 
 	public static void main(String[] args) {

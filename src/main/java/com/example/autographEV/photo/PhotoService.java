@@ -19,17 +19,14 @@ public class PhotoService {
         return photoRepository.findAll();
     }
 
-    public Optional<Photo> getById(String photoId) {
-        return photoRepository.findById(photoId);
+    public Photo getPhotoById(String photoId) {
+        return photoRepository.findById(photoId).get();
     }
 
     public Photo updatePhoto(Photo photo) {
         return photoRepository.save(photo);
     }
 
-    public void deletePhoto(String photoId) {
-        photoRepository.deleteById(photoId);
-    }
-
+    public void deletePhoto(String photoId) { photoRepository.deleteById(photoId); }
 
 }
