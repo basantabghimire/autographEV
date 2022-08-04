@@ -4,6 +4,7 @@ package com.example.autographEV.album;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -16,7 +17,7 @@ public class AlbumController {
     private AlbumService albumService;
 
     @PostMapping
-    public Album saveAlbum(@RequestBody Album album){
+    public Album saveAlbum(@RequestBody @Valid Album album){
         System.out.println("Add new Album");
         return albumService.saveAlbum(album);
     }
@@ -35,7 +36,7 @@ public class AlbumController {
         return "No such element found";
     }
     @PutMapping
-    public Album updateAlbum(@RequestBody Album album){
+    public Album updateAlbum(@RequestBody @Valid Album album){
         System.out.println("Edit album");
         return albumService.updateAlbum(album);
     }

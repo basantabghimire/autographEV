@@ -2,6 +2,8 @@ package com.example.autographEV.photo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -13,7 +15,7 @@ public class PhotoController {
     private PhotoService photoService;
 
     @PostMapping
-    public Photo savePhoto(@RequestBody Photo photo){
+    public Photo savePhoto(@RequestBody @Valid Photo photo){
         System.out.println("Save photo");
         return photoService.savePhoto(photo);
     }
@@ -31,8 +33,9 @@ public class PhotoController {
     public String noSuchElementError(){
         return "No such element found";
     }
+
     @PutMapping
-    public Photo updatePhoto(@RequestBody Photo photo){
+    public Photo updatePhoto(@RequestBody @Valid Photo photo){
         System.out.println("picture update");
         return photoService.updatePhoto(photo);
     }

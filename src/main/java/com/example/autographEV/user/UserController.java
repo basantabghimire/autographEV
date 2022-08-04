@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -17,7 +18,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public User saveUser(@RequestBody User user){
+    public User saveUser(@RequestBody @Valid User user){
         System.out.println("Add user info");
         return userService.saveUser(user);
     }
@@ -32,12 +33,9 @@ public class UserController {
         System.out.println("One User information get based by the given ID");
         return userService.getById(userId);
     }
-    @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity <String> noSuchElementError(){
-        return new ResponseEntity<>("No such element found", HttpStatus.NOT_FOUND);
-    }
+
     @PutMapping
-    public User updateUser (@RequestBody User user){
+    public User updateUser (@RequestBody @Valid User user){
         System.out.println("Update an user information by Id" );
         return userService.updateUser(user);
     }
@@ -59,8 +57,5 @@ public class UserController {
         }
         return userService.getByName(name);
     }
-    @ExceptionHandler(RestrictedInfoException.class)
-    public ResponseEntity <String> restrictedInfoError(RestrictedInfoException ex){
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
-    }
+
 }
