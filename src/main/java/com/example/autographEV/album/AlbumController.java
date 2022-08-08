@@ -35,6 +35,7 @@ public class AlbumController {
     public String noSuchElementError(){
         return "No such element found";
     }
+
     @PutMapping
     public Album updateAlbum(@RequestBody @Valid Album album){
         System.out.println("Edit album");

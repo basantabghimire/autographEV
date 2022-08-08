@@ -15,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface ValidName {
 
-    String message() default "Enter name is not valid";
+    String message() default "Enter valid name";
 
     Class<?>[] groups() default { };
 
