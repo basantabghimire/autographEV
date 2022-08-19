@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 
 
 @RestController
-@RequestMapping("/api/A4/users")
+@RequestMapping("/api/users")
 public class UserController {
     @Autowired
     private UserService userService;

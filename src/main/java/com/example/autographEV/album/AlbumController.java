@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 
 
 @RestController
-@RequestMapping("/api/A4/album")
+@RequestMapping("/api/album")
 public class AlbumController {
 
     @Autowired

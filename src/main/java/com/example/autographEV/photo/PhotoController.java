@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/api/A4/photo")
+@RequestMapping("/api/photo")
 public class PhotoController {
 
     @Autowired

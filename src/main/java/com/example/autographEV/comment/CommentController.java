@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 
 
 @RestController
-@RequestMapping("/api/A4/comment")
+@RequestMapping("/api/comment")
 public class CommentController {
 
     @Autowired
