@@ -1,6 +1,5 @@
 package com.example.autographEV.user;
 
-import com.example.autographEV.Validator.ValidName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +16,6 @@ import javax.validation.constraints.NotEmpty;
 public class User {
     @Id
     private String userId;
-    //@NotEmpty @ValidName
     private String name;
     @Email
     private String email;
