@@ -1,18 +1,11 @@
 package com.example.autographEV.user;
-
 import com.example.autographEV.exception.RestrictedInfoException;
 import com.example.autographEV.firebase.FirebaseService;
-import com.example.autographEV.firebase.FirebaseUser;
-import com.google.firebase.auth.FirebaseAuthException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.List;
-import java.util.NoSuchElementException;
+
 
 
 @RestController
@@ -21,17 +14,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private FirebaseService firebaseService;
+
 
     @PostMapping
-    public User saveUser(@RequestBody @Valid User user, @RequestHeader(name = "idToken") String idToken) throws IOException, FirebaseAuthException {
-        //System.out.println("Add user info");
-        FirebaseUser firebaseUser = firebaseService.authenticate(idToken);
-        if(firebaseUser != null){
+    public User saveUser(@RequestBody @Valid User user, String idToken) {
+        System.out.println("Add user info");
             return userService.saveUser(user);
-        }
-        return null;
     }
 
     @GetMapping
