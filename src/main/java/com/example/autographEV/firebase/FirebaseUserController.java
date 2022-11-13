@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/f-users")
 public class FirebaseUserController {
@@ -31,7 +31,6 @@ public class FirebaseUserController {
         return null;
     }
 
-    //
     @GetMapping
     public List<User> getAllUsers(){
         System.out.println("All user information");
@@ -69,6 +68,4 @@ public class FirebaseUserController {
         }
         return userService.getByName(name);
     }
-
-
 }
