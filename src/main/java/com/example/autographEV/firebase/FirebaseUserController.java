@@ -31,14 +31,14 @@ public class FirebaseUserController {
         return null;
     }
 
-    @GetMapping
-    public List<User> getAllUsers(){
+    @GetMapping("/{all}")
+    public List<User> getAllUsers(@RequestHeader(name = "idToken") String idToken) {
         System.out.println("All user information");
         return userService.getAllUsers();
     }
 
     @GetMapping("/{userId}")
-    public User getById(@RequestParam("userId") String userId) {
+    public User getById(@RequestParam("userId") String userId ) {
         System.out.println("One User information get based by the given ID");
         return userService.getById(userId);
     }

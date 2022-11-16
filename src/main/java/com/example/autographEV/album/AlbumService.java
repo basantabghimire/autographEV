@@ -7,7 +7,6 @@ import java.util.List;
 
 @Service
 public class AlbumService {
-
     @Autowired
     private AlbumRepository albumRepository;
 
@@ -31,6 +30,5 @@ public class AlbumService {
     public void deleteAlbum(String albumId) {
         albumRepository.deleteById(albumId);
     }
-
 
 }

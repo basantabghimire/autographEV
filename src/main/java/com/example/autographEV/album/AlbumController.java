@@ -21,8 +21,8 @@ public class AlbumController {
         System.out.println("Add new Album");
         return albumService.saveAlbum(album);
     }
-    @GetMapping
-    public List<Album> getAllAlbums(){
+    @GetMapping("/all")
+    public List<Album> getAllAlbums(@RequestHeader(name = "idToken") String idToken){
         System.out.println("Get all album");
         return albumService.getAllAlbums();
     }
@@ -36,13 +36,13 @@ public class AlbumController {
         return "No such element found";
     }
 
-    @PutMapping
+    @PutMapping("/{albumId}")
     public Album updateAlbum(@RequestBody @Valid Album album){
         System.out.println("Edit album");
         return albumService.updateAlbum(album);
     }
 
-    @DeleteMapping("{albumId}")
+    @DeleteMapping("/{albumId}")
     public void deleteAlbum(@PathVariable String albumId){
         System.out.println("Delete album by Id");
         albumService.deleteAlbum(albumId);
