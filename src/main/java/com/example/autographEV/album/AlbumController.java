@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/album")
 public class AlbumController {
 
