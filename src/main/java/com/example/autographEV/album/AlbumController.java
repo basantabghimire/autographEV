@@ -23,7 +23,7 @@ public class AlbumController {
         return albumService.saveAlbum(album);
     }
     @GetMapping("/all")
-    public List<Album> getAllAlbums(@RequestHeader(name = "idToken") String idToken){
+    public List<Album> getAllAlbums()/*(@RequestHeader(name = "idToken") String idToken)*/{
         System.out.println("Get all album");
         return albumService.getAllAlbums();
     }
