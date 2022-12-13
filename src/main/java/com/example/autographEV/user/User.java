@@ -22,5 +22,6 @@ public class User {
     @NotEmpty
     private String profilePhotoUrl;
     private String address;
-    private int age;
+
+
 }

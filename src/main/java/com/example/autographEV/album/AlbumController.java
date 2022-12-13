@@ -27,8 +27,8 @@ public class AlbumController {
         System.out.println("Get all album");
         return albumService.getAllAlbums();
     }
-    @GetMapping("/{albumId}")
-    public Album getById(@RequestParam("albumId") String albumId){
+    @GetMapping("/me")
+    public Album getById(@RequestParam("albumId") String albumId,@RequestHeader(name="idToken")String idToken){
         System.out.println("get album by Id");
         return albumService.getById(albumId);
     }

@@ -16,14 +16,17 @@ public class FirebaseConfig {
 
     @Bean
     public FirebaseApp initializeFirebase() throws IOException {
+
         PathMatchingResourcePatternResolver resolver= new PathMatchingResourcePatternResolver();
         Resource resource =resolver.getResource("classpath:login-backend-spring.json");
+        //Resource resource =resolver.getResource("classpath:login-backend-spring.json");
 
         FileInputStream serviceAccount = new FileInputStream(resource.getFile());
 
         FirebaseOptions options = FirebaseOptions.builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .setDatabaseUrl("https://login-backend-spring.firebaseio.com/")
+                //.setDatabaseUrl("https://login-backend-spring.firebaseio.com/")
                 .build();
         return FirebaseApp.initializeApp(options);
 
